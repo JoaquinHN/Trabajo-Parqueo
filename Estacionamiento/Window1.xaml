@@ -1,26 +1,22 @@
-﻿<Window x:Class="Estacionamiento.MainWindow"
+﻿<Window x:Class="Estacionamiento.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Estacionamiento"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <!--Comentario-->
+        Title="Window1" Height="450" Width="800">
     <Grid Background="PapayaWhip">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-
+            
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Left" Height="145" Margin="30,30,0,0" VerticalAlignment="Top" Width="400" Background="Linen" Grid.Row="0" >
-            <Label Content="Ingrese la placa del vehiculo" />
-            <TextBox Height="23" TextWrapping="Wrap" Text="TextBox"/>
+            <Label Content="Ingrese la placa del vehiculo" FontFamily="Segoe UI"/>
 
         </StackPanel>
-        <TextBox HorizontalAlignment="Left" Margin="-55,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-
+        
 
     </Grid>
-    
 </Window>
