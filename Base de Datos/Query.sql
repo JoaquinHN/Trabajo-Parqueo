@@ -1,10 +1,13 @@
 USE tempdb
 GO
 
-IF NOT EXISTS(SELECT * FROM sys.databases WHERE [name] = 'Estacionamiento')
+IF EXISTS(SELECT * FROM sys.databases WHERE [name] = 'Estacionamiento')
 	BEGIN
-		CREATE DATABASE Estacionamiento
+		DROP DATABASE Estacionamiento
 	END
+GO
+
+CREATE DATABASE Estacionamiento
 GO
 
 USE Estacionamiento
@@ -17,6 +20,8 @@ CREATE TABLE Parqueo.Automovil
 (
 	idAuto INT NOT NULL IDENTITY CONSTRAINT PK_Automovil_id PRIMARY KEY CLUSTERED,
 	placa VARCHAR(10) NOT NULL,
+	idtipovehiculo INT NOT NULL,
+
 	
 )
 GO
@@ -24,10 +29,14 @@ GO
 CREATE TABLE Parqueo.Transaccion
 (
 	idTran INT NOT NULL IDENTITY CONSTRAINT PK_Tran_id PRIMARY KEY CLUSTERED,
-	fechaEntrada DATETIME2 NOT NULL,
-	fechaSalida DATETIME2 NOT NULL,
-	cobro MONEY NOT NULL
+	fechaEntrada TIME NOT NULL
+		DEFAULT GETDATE(),
+	fechaSalida TIME NULL,
+	cobro MONEY NOT NULL,
+	idautomovil INT NOT NULl,
 )
+GO
+
 
 CREATE TABLE Parqueo.TipoAutomovil
 (
@@ -37,10 +46,17 @@ CREATE TABLE Parqueo.TipoAutomovil
 GO
 
 
-ALTER TABLE Parqueo.Automovil  WITH CHECK ADD  CONSTRAINT FK_Parqueo_Automovil$EsUn$Parqueo_TipoAutomovil_id FOREIGN KEY(idAuto)
+ALTER TABLE Parqueo.Automovil  WITH CHECK ADD  CONSTRAINT FK_Parqueo_Automovil$EsUn$Parqueo_TipoAutomovil_id FOREIGN KEY(idtipovehiculo)
 REFERENCES Parqueo.TipoAutomovil (idTipo)
 GO
 
-ALTER TABLE Parqueo.Automovil  WITH CHECK ADD  CONSTRAINT FK_Parqueo_Automovil$TieneUna$Parqueo_Transaccion_id FOREIGN KEY(idAuto)
-REFERENCES Parqueo.Transaccion (idTran)
+ALTER TABLE Parqueo.Transaccion  WITH CHECK ADD  CONSTRAINT FK_Transaccion$TieneUn$Automovil FOREIGN KEY(idautomovil)
+REFERENCES Parqueo.Automovil (idAuto)
+GO
+
+INSERT INTO Parqueo.Transaccion
+	VALUES
+	(GETDATE(),GETDATE(),112)
+GO
+SELECT*FROM Parqueo.Transaccion
 GO
