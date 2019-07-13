@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Estacionamiento"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,8 +16,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
+        <Button Name="btnentrada" Content="ENTRADA" HorizontalAlignment="Left" Height="209" Margin="100,0,0,0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" Width="226" Click="Btnentrada_Click"/>
+        <Button Name="btnsalida" Content="SALIDA" HorizontalAlignment="Left" Height="209" Margin="68,0,0,0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" Width="226" Grid.Column="1" Click="Btnsalida_Click"/>
+        <Label Name="lblhora" Content="Label" Grid.Column="1" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top" Height="36" Width="226"/>
         
     </Grid>
 </Window>
