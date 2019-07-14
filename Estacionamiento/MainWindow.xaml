@@ -64,8 +64,9 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Placas" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" />
-                        <Label Content="Hora de Entrada" Grid.Column="1" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" />
+                        <Label Content="Hora de Entrada" Grid.Column="1" Grid.Row="0" FontSize="30" HorizontalAlignment="Center"></Label>
                         <ListBox x:Name="lbAutos" Grid.Column="0"  Grid.Row="1" Background="LightBlue" Margin="10"/>
+
                         <ListBox x:Name="lbhora" Grid.Column="1" Grid.Row="1" Background="LightBlue" Margin="10" />
                         <Button x:Name="btnCobro" Content="Cobrar" Grid.Column="3" Width="100" Grid.Row="1" Click="BtnCobro_Click"/>
 
