@@ -45,19 +45,38 @@
                         <Label Content="Placa Vehiculos:" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
                         <TextBox Name="txtplaca" FontSize="15"  Grid.Row="0" Grid.Column="1" Height="40" Width="180" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="B AA 0001"  Grid.RowSpan="1" />
                         <Label Content="Tipo Vehiculo" Grid.Row="1" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"  />
-                        <ComboBox Name="cmbtipo" Grid.Row="1" Grid.Column="1" Height="30" Width="180" HorizontalAlignment="Left" Grid.ColumnSpan="2"  SelectionChanged="Cmbtipo_SelectionChanged"/>
+                        <ComboBox Name="cmbtipo" Grid.Row="1" Grid.Column="1" Height="30" Width="170" HorizontalAlignment="Left" Grid.ColumnSpan="2"  SelectionChanged="Cmbtipo_SelectionChanged" Margin="0,10.4,0,10"/>
                         <Button Name="btningresar" Content="Ingresar" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" FontSize="20" FontWeight="Black" Click="Btningresar_Click"  Grid.RowSpan="2"/>
-                        <ListBox x:Name="lbMostrarAutos" Grid.Column="3"  Grid.Row="0" Grid.RowSpan="3" Margin="10" />
+                        <ListBox x:Name="lbMostrarAutos" Grid.Column="3"  Grid.Row="0" Grid.RowSpan="3" Margin="10" Background="LightBlue"/>
 
                     </Grid>
                 </TabItem>
                 <TabItem Header="Salida de Autos">
-                    <Grid Background="#FFA0B8CD"/>
+                    <Grid Background="#FFA0B8CD">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Placas" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" />
+                        <Label Content="Hora de Entrada" Grid.Column="1" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" />
+                        <ListBox x:Name="lbAutos" Grid.Column="0"  Grid.Row="1" Background="LightBlue" Margin="10"/>
+                        <ListBox x:Name="lbhora" Grid.Column="1" Grid.Row="1" Background="LightBlue" Margin="10" />
+                        <Button x:Name="btnCobro" Content="Cobrar" Grid.Column="3" Width="100" Grid.Row="1" Click="BtnCobro_Click"/>
+
+
+                    </Grid>
+
                 </TabItem>
             </TabControl>
 
         </Border>
-        <Label Content="Sistema de Estacionamiento"/>
+        <Label Content="Sistema de Estacionamiento" FontSize="50" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" />
     </Grid>
 
 </Window>

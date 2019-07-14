@@ -25,12 +25,12 @@ namespace Estacionamiento
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int idauto;
+
         Clase_Conectar conexion = new Clase_Conectar();
         private DataTable tabla;
         public MainWindow()
         {
-            
+
             InitializeComponent();
             tabla = new DataTable();
             try
@@ -56,19 +56,8 @@ namespace Estacionamiento
                 MessageBox.Show(e.ToString());
             }
             MostrarAutos();
-        }
+            MostrarHora();
 
-        private void Btnentrada_Click(object sender, RoutedEventArgs e)
-        {
-            Window1 win = new Window1();
-            win.Owner = this;
-            win.Show();
-        }
-
-        private void Btnsalida_Click(object sender, RoutedEventArgs e)
-        {
-            Window2 win2 = new Window2();
-            win2.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -112,7 +101,6 @@ namespace Estacionamiento
                 }
             }
         }
-
         private void Cmbtipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -129,8 +117,11 @@ namespace Estacionamiento
                     DataTable tablaAuto = new DataTable();
                     sqlDataAdapter.Fill(tablaAuto);
                     lbMostrarAutos.DisplayMemberPath = "placa";
+                    lbAutos.DisplayMemberPath = "placa";
                     lbMostrarAutos.SelectedValuePath = "idAuto";
+                    lbAutos.SelectedValuePath = "idAuto";
                     lbMostrarAutos.ItemsSource = tablaAuto.DefaultView;
+                    lbAutos.ItemsSource = tablaAuto.DefaultView;
                 }
             }
             catch (Exception e)
@@ -139,5 +130,37 @@ namespace Estacionamiento
                 MessageBox.Show(e.ToString());
             }
         }
+        private void MostrarHora()
+        {
+            try
+            {
+                string query = "SELECT * FROM Parqueo.Automovil";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, conexion.Conexion);
+                using (sqlDataAdapter)
+                {
+                    DataTable tablaHora = new DataTable();
+                    sqlDataAdapter.Fill(tablaHora);
+                    lbhora.DisplayMemberPath = "horaEntrada";
+                    lbhora.SelectedValuePath = "idAuto";
+                    lbhora.ItemsSource = tablaHora.DefaultView;
+                }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private void BtnCobro_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
 }
+
+
+    
+        
+
