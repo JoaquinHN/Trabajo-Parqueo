@@ -15,6 +15,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
 
+
     <Grid Background="LightBlue" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -44,32 +45,45 @@
                         </Grid.RowDefinitions>
                         <Label Content="Placa Vehiculos:" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
                         <TextBox Name="txtplaca" FontSize="15"  Grid.Row="0" Grid.Column="1" Height="40" Width="180" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="B AA 0001"  Grid.RowSpan="1" />
-                        <Label Content="Tipo Vehiculo" Grid.Row="1" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"  />
+                        <Label Content="Tipo Vehiculo" Grid.Row="1" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="39,22,55,0"  />
                         <ComboBox Name="cmbtipo" Grid.Row="1" Grid.Column="1" Height="30" Width="170" HorizontalAlignment="Left" Grid.ColumnSpan="2"  SelectionChanged="Cmbtipo_SelectionChanged" Margin="0,10.4,0,10"/>
                         <Button Name="btningresar" Content="Ingresar" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" FontSize="20" FontWeight="Black" Click="Btningresar_Click"  Grid.RowSpan="2"/>
                         <ListBox x:Name="lbMostrarAutos" Grid.Column="3"  Grid.Row="0" Grid.RowSpan="3" Margin="10" Background="LightBlue"/>
+                        <Label Content="Hora Ingreso:" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="36,100,58,0"/>
+                        <TextBox Name="txthentrada" FontSize="15" Grid.Column="1" Height="40" Width="124" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="00:00:00.0000"  Grid.RowSpan="2" Margin="0,96,0,40" IsEnabled="False" />
 
                     </Grid>
                 </TabItem>
                 <TabItem Header="Salida de Autos">
                     <Grid Background="#FFA0B8CD">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="66*"/>
+                            <ColumnDefinition Width="193*"/>
+                            <ColumnDefinition Width="260*"/>
+                            <ColumnDefinition Width="259*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Placas" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" />
-                        <Label Content="Hora de Entrada" Grid.Column="1" Grid.Row="0" FontSize="30" HorizontalAlignment="Center"></Label>
-                        <ListBox x:Name="lbAutos" Grid.Column="0"  Grid.Row="1" Background="LightBlue" Margin="10"/>
-
-                        <ListBox x:Name="lbhora" Grid.Column="1" Grid.Row="1" Background="LightBlue" Margin="10" />
-                        <Button x:Name="btnCobro" Content="Cobrar" Grid.Column="3" Width="100" Grid.Row="1" Click="BtnCobro_Click"/>
-
+                        <Label Content="Placas" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" Margin="0,0,80,0" Grid.Column="1" Width="113" />
+                        <ListBox x:Name="lbAutos" Grid.Column="1" Background="LightBlue" Margin="0,9,80,11" Grid.Row="1"/>
+                        <Button x:Name="btnCobro" Content="Cobrar" Grid.Column="3" Width="100" Grid.Row="1" Click="BtnCobro_Click" Margin="101,164,58,30"/>
+                        <Label x:Name="Placa" Content="Placa" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="10,15,0,0" VerticalAlignment="Top" Width="48" Grid.Row="1"/>
+                        <Label x:Name="tipovehiculo" Content="Tipo Vehiculo" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="10,65,0,0" Grid.Row="1" VerticalAlignment="Top" Width="97"/>
+                        <Label x:Name="horaingreso" Content="Hora de ingreso" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="4,113,0,0" Grid.Row="1" VerticalAlignment="Top" Width="111"/>
+                        <Label x:Name="horasalida" Content="Hora de Salida" Grid.Column="2" HorizontalAlignment="Left" Height="28" Margin="6,157,0,0" Grid.Row="1" VerticalAlignment="Top" Width="111"/>
+                        <TextBox Name="txtpla" FontSize="15"  Grid.Row="1" Grid.Column="2" Height="40" Width="124" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="Placa"  Grid.RowSpan="1" Margin="126,0,0,186" />
+                        <TextBox Name="txttip" FontSize="15"  Grid.Row="1" Grid.Column="2" Height="40" Width="127" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="Tipo Vehiculo"  Grid.RowSpan="1" Margin="123,52,0,134" IsEnabled="False"/>
+                        <TextBox Name="txthingre" FontSize="15"  Grid.Row="1" Grid.Column="2" Height="40" Width="124" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="00:00:00.0000"  Grid.RowSpan="1" Margin="126,98,0,88" IsEnabled="False" />
+                        <TextBox Name="txths" FontSize="15"  Grid.Row="1" Grid.Column="2" Height="40" Width="124" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="00:00:00.0000"  Grid.RowSpan="1" Margin="126,143,0,43" IsEnabled="False"/>
+                        <Button x:Name="btnBuscar" Content="Buscar" Grid.Column="2" Click="BtnBuscar_Click" Margin="179,15,0,12" Height="Auto"/>
+                        <Label x:Name="lblhorasestacionadas" Content="Horas de Estacionamiento" Grid.Column="3" HorizontalAlignment="Left" Height="28" Margin="0,13,0,0" VerticalAlignment="Top" Width="175" Grid.Row="1"/>
+                        <TextBox x:Name="txthtotal" FontSize="15"  Grid.Row="1" Grid.Column="3" Width="58" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="Horas"  Grid.RowSpan="1" Margin="180,7,0,186" IsEnabled="False" RenderTransformOrigin="-0.025,0.602" />
+                        <Label x:Name="lbltotalapagar" Content="total a pagar" Grid.Column="3" HorizontalAlignment="Left" Height="28" Margin="0,52,0,0" VerticalAlignment="Top" Width="95" Grid.Row="1"/>
+                        <TextBox x:Name="txttotal" FontSize="15"  Grid.Row="1" Grid.Column="3" Width="58" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="Pago"  Grid.RowSpan="1" Margin="117,47,0,146" IsEnabled="False" RenderTransformOrigin="-0.025,0.602"/>
+                        <TextBox x:Name="txtidauto" FontSize="15"  Grid.Row="1" Grid.Column="3" Width="58" HorizontalAlignment="Left"  materialDesign:HintAssist.Hint="AUTO"  Grid.RowSpan="1" Margin="36.8,98.4,0,94" IsEnabled="False" RenderTransformOrigin="-0.025,0.602" IsHitTestVisible="False" Visibility="Hidden"/>
 
                     </Grid>
 
