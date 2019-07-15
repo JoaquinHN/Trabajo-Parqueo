@@ -1,28 +1,28 @@
 USE tempdb
 GO
 
-IF EXISTS(SELECT * FROM sys.databases WHERE [name] = 'Estacionamiento1')
+IF EXISTS(SELECT * FROM sys.databases WHERE [name] = 'Estacionamiento')
 	BEGIN
-		DROP DATABASE Estacionamiento1
+		DROP DATABASE Estacionamiento
 	END
 GO
 
-CREATE DATABASE Estacionamiento1
+CREATE DATABASE Estacionamiento
 GO
 
-USE Estacionamiento1
+USE Estacionamiento
 GO
 
-CREATE SCHEMA Parqueo1
+CREATE SCHEMA Parqueo
 GO
-CREATE TABLE Parqueo1.TipoAutomovil
+CREATE TABLE Parqueo.TipoAutomovil
 (
 	idTipo INT NOT NULL IDENTITY CONSTRAINT PK_Tipo_id PRIMARY KEY CLUSTERED,
 	tipoVehiculo NVARCHAR(12) NOT NULL,
 )
 GO
 
-CREATE TABLE Parqueo1.Automovil
+CREATE TABLE Parqueo.Automovil
 (
 	idAuto INT NOT NULL IDENTITY CONSTRAINT PK_Automovil_id PRIMARY KEY CLUSTERED,
 	placa VARCHAR(10) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE Parqueo1.Automovil
 )
 GO
 
-CREATE TABLE Parqueo1.Transaccion
+CREATE TABLE Parqueo.Transaccion
 (
 	idTran INT NOT NULL IDENTITY CONSTRAINT PK_Tran_id PRIMARY KEY CLUSTERED,
 	horaSalida TIME NULL,
@@ -43,20 +43,18 @@ CREATE TABLE Parqueo1.Transaccion
 GO
 
 
-
-
-ALTER TABLE Parqueo1.Automovil
+ALTER TABLE Parqueo.Automovil
 	ADD CONSTRAINT
 	FK_UnTipoVehiculo_PuedeTenerVariosVehiculos
-	FOREIGN KEY (idTipo) REFERENCES Parqueo1.TipoAutomovil(idTipo)
+	FOREIGN KEY (idTipo) REFERENCES Parqueo.TipoAutomovil(idTipo)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION
 GO
 
-ALTER TABLE Parqueo1.Transaccion
+ALTER TABLE Parqueo.Transaccion
 	ADD CONSTRAINT
 	FK_UnVehiculo_PuedeTener_VariasTransacciones
-	FOREIGN KEY (idAuto) REFERENCES Parqueo1.Automovil(idAuto)
+	FOREIGN KEY (idAuto) REFERENCES Parqueo.Automovil(idAuto)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION
 GO
@@ -68,21 +66,21 @@ AS
 DECLARE @idAuto INT
 BEGIN TRANSACTION
 
-		IF NOT EXISTS(SELECT * FROM Parqueo1.Automovil WHERE placa=@placa)
+		IF NOT EXISTS(SELECT * FROM Parqueo.Automovil WHERE placa=@placa)
 		BEGIN
-			INSERT INTO Parqueo1.Automovil(placa , idTipo) 
+			INSERT INTO Parqueo.Automovil(placa , idTipo) 
 			VALUES (@placa, @idTipo)
-			INSERT INTO Parqueo1.Transaccion(idAuto,horaEntrada)
+			INSERT INTO Parqueo.Transaccion(idAuto,horaEntrada)
 			VALUES(@idTipo,GETDATE())
 		END
 		ELSE
 			BEGIN	
-			SELECT @idAuto =idAuto FROM Parqueo1.Automovil WHERE placa = @placa AND idTipo=@idTipo
-			IF NOT EXISTS(SELECT * FROM Parqueo1.Transaccion a INNER JOIN Parqueo1.Automovil b
+			SELECT @idAuto =idAuto FROM Parqueo.Automovil WHERE placa = @placa AND idTipo=@idTipo
+			IF NOT EXISTS(SELECT * FROM Parqueo.Transaccion a INNER JOIN Parqueo.Automovil b
 			ON a.idAuto = b.idAuto WHERE a.idAuto=@idAuto AND b.idTipo=@idTipo 
 			AND a.horaSalida IS NULL)
 				BEGIN
-					INSERT INTO Parqueo1.Transaccion(idAuto,horaEntrada) VALUES (@idAuto,GETDATE())
+					INSERT INTO Parqueo.Transaccion(idAuto,horaEntrada) VALUES (@idAuto,GETDATE())
 				END
 				
 			END
@@ -94,8 +92,8 @@ GO
 
 CREATE PROC MostrarVehiculo
 AS BEGIN
-	SELECT a.idAuto as Id, a.placa as Placa,b.idTipo, b.tipoVehiculo, c.horaEntrada FROM Parqueo1.Automovil a INNER JOIN Parqueo1.TipoAutomovil b 
-	ON a.idAuto=b.idTipo INNER JOIN Parqueo1.Transaccion c ON a.idAuto=c.idTran
+	SELECT a.idAuto as Id, a.placa as Placa,b.idTipo, b.tipoVehiculo, c.horaEntrada FROM Parqueo.Automovil a INNER JOIN Parqueo.TipoAutomovil b 
+	ON a.idAuto=b.idTipo INNER JOIN Parqueo.Transaccion c ON a.idAuto=c.idTran
 END
 GO
 
@@ -114,7 +112,7 @@ go
 
 
 /*
-INSERT INTO Parqueo1.TipoAutomovil
+INSERT INTO Parqueo.TipoAutomovil
 	VALUES('Rastra'),
 		  ('Moto'),
 		  ('Turismo'),
@@ -125,7 +123,7 @@ INSERT INTO Parqueo1.TipoAutomovil
 		  ('Rastra'),
 		  ('Motocicleta')
 GO
-INSERT INTO Parqueo1.Automovil(placa,idTipo)
+INSERT INTO Parqueo.Automovil(placa,idTipo)
 	VALUES('f25FF', 1)
 GO
 INSERT INTO Parqueo.Transaccion(idautomovil)
@@ -155,13 +153,13 @@ GO
 
 
 --CONSULTAS
-SELECT * FROM Parqueo1.Automovil
+SELECT * FROM Parqueo.Automovil
 GO
-SELECT * FROM Parqueo1.Transaccion
+SELECT * FROM Parqueo.Transaccion
 GO
-SELECT * FROM Parqueo1.TipoAutomovil
+SELECT * FROM Parqueo.TipoAutomovil
 GO
 
-INSERT INTO Parqueo1.Transaccion(idAuto,horaEntrada)
-VALUES(1,GETDATE())
+INSERT INTO Parqueo.Transaccion(idAuto,horaEntrada)
+VALUES(2,GETDATE())
 GO
