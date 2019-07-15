@@ -207,7 +207,7 @@ namespace Estacionamiento
                     txthingre.Text = dat.Hingreso;
                     txtidauto.Text = dat.IdAuto;
                 }
-
+                //f
                 TimeSpan diferenciahoras = new TimeSpan();
                 DateTime horaingreso = new DateTime();
                 horaingreso = DateTime.Parse(txthingre.Text);
